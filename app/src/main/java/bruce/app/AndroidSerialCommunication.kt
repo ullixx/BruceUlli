@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import java.io.IOException
 import java.nio.ByteBuffer
 
-class AndroidSerialCommunication(private val context: Context) : SerialCommunication {
+class AndroidSerialCommunication(private val context: Context, private val isGerman: () -> Boolean = { true }) : SerialCommunication {
     companion object {
         private const val TAG = "SerialComm"
         private const val DEFAULT_BAUDRATE = 115200
@@ -109,7 +109,44 @@ class AndroidSerialCommunication(private val context: Context) : SerialCommunica
     }
 
     private fun notifyOutput(message: String) {
-        outputListener?.invoke(message)
+        val translated = if (!isGerman()) message else message
+            .replace("Starting USB Serial Connection", "USB-Seriellverbindung wird gestartet")
+            .replace("Already have permission for device", "Berechtigung für das Gerät liegt bereits vor")
+            .replace("Requesting permission for device...", "Geräteberechtigung wird angefordert...")
+            .replace("No compatible USB device found", "Kein kompatibles USB-Gerät gefunden")
+            .replace("Error connecting:", "Verbindungsfehler:")
+            .replace("Found ", "Gefunden: ")
+            .replace(" USB devices", " USB-Geräte")
+            .replace("Device found:", "Gerät gefunden:")
+            .replace("Unknown", "Unbekannt")
+            .replace("Manufacturer:", "Hersteller:")
+            .replace("Product:", "Produkt:")
+            .replace("Device Class:", "Geräteklasse:")
+            .replace("Device Subclass:", "Geräteunterklasse:")
+            .replace("Found compatible device!", "Kompatibles Gerät gefunden!")
+            .replace("No USB devices found. Make sure:", "Keine USB-Geräte gefunden. Bitte prüfe:")
+            .replace("USB debugging is enabled", "USB-Debugging ist aktiviert")
+            .replace("USB is connected in data/file transfer mode", "USB ist im Daten-/Dateiübertragungsmodus verbunden")
+            .replace("Device has USB OTG support", "Das Gerät unterstützt USB-OTG")
+            .replace("You have granted USB permission to the app", "Die USB-Berechtigung wurde der App erteilt")
+            .replace("Checking if device is compatible:", "Gerätekompatibilität wird geprüft:")
+            .replace("Vendor ID:", "Hersteller-ID:")
+            .replace("Supported vendor ID found!", "Unterstützte Hersteller-ID gefunden!")
+            .replace("CDC device detected!", "CDC-Gerät erkannt!")
+            .replace("Device not compatible", "Gerät nicht kompatibel")
+            .replace("USB not connected. Attempting to reconnect...", "USB nicht verbunden. Neuer Verbindungsversuch...")
+            .replace("Sending command:", "Befehl wird gesendet:")
+            .replace("Failed to send command:", "Befehl konnte nicht gesendet werden:")
+            .replace("Retry failed to send command:", "Erneuter Sendeversuch fehlgeschlagen:")
+            .replace("Retry successful:", "Erneuter Sendeversuch erfolgreich:")
+            .replace("Bytes sent:", "Gesendete Bytes:")
+            .replace("Command sent successfully:", "Befehl erfolgreich gesendet:")
+            .replace("Error sending command:", "Fehler beim Senden des Befehls:")
+            .replace("USB Permission denied. Please grant permission when prompted.", "USB-Berechtigung verweigert. Bitte erteile die Berechtigung bei Nachfrage.")
+            .replace("Error setting up USB permissions:", "Fehler beim Einrichten der USB-Berechtigungen:")
+            .replace("Error initializing serial connection", "Fehler beim Initialisieren der seriellen Verbindung")
+            .replace("No USB device attached", "Kein USB-Gerät angeschlossen")
+        outputListener?.invoke(translated)
     }
 
     override fun connect() {
