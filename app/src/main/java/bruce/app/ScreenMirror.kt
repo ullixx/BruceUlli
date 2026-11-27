@@ -285,6 +285,7 @@ private class ScreenCanvas(typeface: Typeface) {
 @Composable
 fun ScreenMirrorPanel(
     serial: SerialCommunication?,
+    isGerman: Boolean = true,
     modifier: Modifier = Modifier,
     onClose: () -> Unit = {}
 ) {
@@ -353,24 +354,24 @@ fun ScreenMirrorPanel(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Screen Mirror (USB OTG)",
+                text = if (isGerman) "Bildschirm spiegeln (USB-OTG)" else "Screen Mirror (USB OTG)",
                 color = White,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.weight(1f)
             )
             Text(
-                text = if (isStreaming) "$packetCount pkts" else "idle",
+                text = if (isStreaming) "$packetCount " + (if (isGerman) "Pakete" else "pkts") else if (isGerman) "Bereit" else "idle",
                 color = if (isStreaming) PurpleAccent else White.copy(alpha = 0.6f),
                 fontSize = 12.sp
             )
             Spacer(Modifier.width(8.dp))
-            TextButton(onClick = onClose) { Text("Close", color = White) }
+            TextButton(onClick = onClose) { Text(if (isGerman) "Schließen" else "Close", color = White) }
         }
 
         if (!isConnected) {
             Text(
-                text = "No USB device attached — plug the Bruce device into the OTG cable and grant permission.",
+                text = if (isGerman) "Kein USB-Gerät angeschlossen – verbinde das Bruce-Gerät per OTG-Kabel und erteile die Berechtigung." else "No USB device attached — plug the Bruce device into the OTG cable and grant permission.",
                 color = White.copy(alpha = 0.7f),
                 fontSize = 12.sp,
                 modifier = Modifier.padding(vertical = 6.dp)
@@ -396,16 +397,16 @@ fun ScreenMirrorPanel(
             if (bmp != null) {
                 Image(
                     bitmap = bmp,
-                    contentDescription = "Bruce device screen",
+                    contentDescription = if (isGerman) "Bruce-Gerätebildschirm" else "Bruce device screen",
                     modifier = Modifier.fillMaxSize().padding(4.dp),
                     contentScale = ContentScale.Fit
                 )
             } else {
                 Text(
                     text = when {
-                        !isConnected -> "NO DEVICE"
-                        isStreaming -> "Waiting for draw calls…\nnavigate the device to trigger a repaint"
-                        else -> "Start the mirror to stream the device screen over USB"
+                        !isConnected -> if (isGerman) "KEIN GERÄT" else "NO DEVICE"
+                        isStreaming -> if (isGerman) "Warte auf Bilddaten…\nBediene das Gerät, um die Anzeige zu aktualisieren" else "Waiting for draw calls…\nnavigate the device to trigger a repaint"
+                        else -> if (isGerman) "Starte die Spiegelung, um den Gerätebildschirm über USB zu übertragen" else "Start the mirror to stream the device screen over USB"
                     },
                     color = White.copy(alpha = 0.6f),
                     fontSize = 14.sp,
@@ -425,7 +426,7 @@ fun ScreenMirrorPanel(
                 containerColor = if (isStreaming) LightGray else PurpleAccent,
                 contentColor = White
             )
-        ) { Text(if (isStreaming) "Stop mirror" else "Start mirror") }
+        ) { Text(if (isGerman) if (isStreaming) "Spiegelung stoppen" else "Spiegelung starten" else if (isStreaming) "Stop mirror" else "Start mirror") }
 
         Spacer(Modifier.height(12.dp))
 

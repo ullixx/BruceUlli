@@ -1,9 +1,10 @@
 name: Bruce Android Build
 
 on:
+  workflow_dispatch:
   push:
     branches:
-      - main
+      - "**"
   pull_request:
     branches:
       - main
@@ -50,12 +51,37 @@ jobs:
           exit 1
         }
 
-    - name: Build with Gradle
+    - name: Build release APK
       run: ./gradlew clean assembleRelease
 
-    - name: Upload APK
+    # Android's Package Installer expects modern APK Signature Schemes.
+    # Use a throwaway key for test builds; no private signing key is committed.
+    - name: Align and sign APK (v1/v2/v3)
+      run: |
+        set -euo pipefail
+        BUILD_TOOLS="$ANDROID_HOME/build-tools/34.0.0"
+        INPUT="app/build/outputs/apk/release/app-release-unsigned.apk"
+        if [ ! -f "$INPUT" ]; then
+          INPUT="$(find app/build/outputs/apk/release -maxdepth 1 -name '*.apk' ! -name '*aligned*' | head -n 1)"
+        fi
+        test -n "$INPUT" && test -f "$INPUT"
+        keytool -genkeypair -noprompt \
+          -keystore "$RUNNER_TEMP/bruce-test-signing.jks" \
+          -storepass changeit -keypass changeit \
+          -alias bruce-test -keyalg RSA -keysize 2048 -validity 10000 \
+          -dname "CN=BruceUlli Test Build, OU=Development, O=BruceUlli, C=DE"
+        "$BUILD_TOOLS/zipalign" -f -p 4 "$INPUT" "$RUNNER_TEMP/bruce-aligned.apk"
+        "$BUILD_TOOLS/apksigner" sign \
+          --ks "$RUNNER_TEMP/bruce-test-signing.jks" \
+          --ks-key-alias bruce-test \
+          --ks-pass pass:changeit --key-pass pass:changeit \
+          --v1-signing-enabled true --v2-signing-enabled true --v3-signing-enabled true \
+          --out app/build/outputs/apk/release/BruceUlli.apk \
+          "$RUNNER_TEMP/bruce-aligned.apk"
+        "$BUILD_TOOLS/apksigner" verify --verbose --print-certs app/build/outputs/apk/release/BruceUlli.apk
+
+    - name: Upload signed APK
       uses: actions/upload-artifact@v4
       with:
-        name: android-apk
-        path: app/build/outputs/apk/release/*.apk
-
+        name: BruceUlli-installierbar
+        path: app/build/outputs/apk/release/BruceUlli.apk
