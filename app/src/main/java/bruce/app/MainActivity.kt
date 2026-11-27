@@ -474,7 +474,7 @@ class MainActivity : ComponentActivity() {
             }
 
             if (showLocalTestLog) {
-                LocalPortalTestLogDialog(isGerman = isGerman, onDismiss = { showLocalTestLog = false })
+                LocalPortalTestLogDialog(context = context, isGerman = isGerman, onDismiss = { showLocalTestLog = false })
             }
 
             // Terminal section at bottom
