@@ -253,7 +253,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 OutlinedButton(onClick = { showLocalTestLog = true }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Lokales Testprotokoll")
+                    Text(if (isGerman) "Lokales Testprotokoll" else "Local test log")
                 }
 
                 // Loading indicator below action buttons
@@ -474,7 +474,7 @@ class MainActivity : ComponentActivity() {
             }
 
             if (showLocalTestLog) {
-                LocalPortalTestLogDialog(onDismiss = { showLocalTestLog = false })
+                LocalPortalTestLogDialog(isGerman = isGerman, onDismiss = { showLocalTestLog = false })
             }
 
             // Terminal section at bottom
