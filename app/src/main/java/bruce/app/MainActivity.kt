@@ -214,7 +214,7 @@ class MainActivity : ComponentActivity() {
                         .height(60.dp)
                 ) {
                     Text(
-                        text = "Install Firmware",
+                        text = (isGerman ? "Firmware installieren" : "Install Firmware"),
                         fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
                         fontSize = 18.sp
                     )
@@ -236,7 +236,7 @@ class MainActivity : ComponentActivity() {
                         ),
                         shape = RoundedCornerShape(8.dp)
                     ) {
-                        Text("Bruce Navigator")
+                        Text((isGerman ? "Bruce-Navigator" : "Bruce Navigator"))
                     }
                     
                     Button(
@@ -248,7 +248,7 @@ class MainActivity : ComponentActivity() {
                         ),
                         shape = RoundedCornerShape(8.dp)
                     ) {
-                        Text("Serial CMD")
+                        Text((isGerman ? "Serieller Befehl" : "Serial CMD"))
                     }
                 }
 
@@ -273,7 +273,7 @@ class MainActivity : ComponentActivity() {
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Please wait...",
+                            text = (isGerman ? "Bitte warten..." : "Please wait..."),
                             color = White,
                             fontSize = 16.sp
                         )
@@ -315,7 +315,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Icon(
                         Icons.Default.Info,
-                        contentDescription = "Documentation",
+                        contentDescription = (isGerman ? "Dokumentation" : "Documentation"),
                         tint = White
                     )
                 }
@@ -343,7 +343,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.padding(16.dp)
                         ) {
                             Text(
-                                text = "Select Device",
+                                text = (isGerman ? "Gerät auswählen" : "Select Device"),
                                 color = White,
                                 fontSize = 18.sp,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -355,7 +355,7 @@ class MainActivity : ComponentActivity() {
                                     modifier = Modifier.fillMaxWidth(),
                                     contentAlignment = Alignment.Center
                                 ) {
-                                    Text("Loading devices...", color = White)
+                                    Text((isGerman ? "Geräte werden geladen..." : "Loading devices..."), color = White)
                                 }
                             } else {
                                 LazyColumn(
@@ -410,7 +410,7 @@ class MainActivity : ComponentActivity() {
                                 Spacer(modifier = Modifier.height(8.dp))
                                 
                                 Text(
-                                    text = "Selected: $selectedDevice",
+                                    text = (isGerman ? "Ausgewählt: $selectedDevice" : "Selected: $selectedDevice"),
                                     color = White,
                                     fontSize = 14.sp,
                                     modifier = Modifier.padding(bottom = 8.dp)
@@ -448,7 +448,7 @@ class MainActivity : ComponentActivity() {
                                     shape = RoundedCornerShape(12.dp)
                                 ) {
                                     Text(
-                                        text = "INSTALL",
+                                        text = (isGerman ? "INSTALLIEREN" : "INSTALL"),
                                         fontSize = 18.sp,
                                         fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
                                     )
@@ -466,7 +466,7 @@ class MainActivity : ComponentActivity() {
                                     contentColor = White
                                 )
                             ) {
-                                Text("Cancel")
+                                Text((isGerman ? "Abbrechen" : "Cancel"))
                             }
                         }
                     }
@@ -507,7 +507,7 @@ class MainActivity : ComponentActivity() {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "Terminal Output",
+                                text = (isGerman ? "Terminalausgabe" : "Terminal Output"),
                                 color = White,
                                 fontSize = 18.sp,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -580,7 +580,7 @@ class MainActivity : ComponentActivity() {
                         OutlinedTextField(
                             value = serialCommand,
                             onValueChange = { serialCommand = it },
-                            label = { Text("Serial Command", color = White) },
+                            label = { Text((isGerman ? "Serieller Befehl" : "Serial Command"), color = White) },
                             modifier = Modifier.weight(1f),
                             colors = OutlinedTextFieldDefaults.colors(
                                 focusedTextColor = White,
@@ -608,7 +608,7 @@ class MainActivity : ComponentActivity() {
                                 contentColor = White
                             )
                         ) {
-                            Text("Send")
+                            Text((isGerman ? "Senden" : "Send"))
                         }
                     }
                 }
@@ -627,7 +627,7 @@ class MainActivity : ComponentActivity() {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Terminal Output:",
+                            text = (isGerman ? "Terminalausgabe:" : "Terminal Output:"),
                             color = White,
                             fontSize = 16.sp,
                             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -701,7 +701,7 @@ class MainActivity : ComponentActivity() {
                         OutlinedTextField(
                             value = serialCommand,
                             onValueChange = { serialCommand = it },
-                            label = { Text("Serial Command", color = White) },
+                            label = { Text((isGerman ? "Serieller Befehl" : "Serial Command"), color = White) },
                             modifier = Modifier.weight(1f),
                             colors = OutlinedTextFieldDefaults.colors(
                                 focusedTextColor = White,
@@ -730,7 +730,7 @@ class MainActivity : ComponentActivity() {
                                 contentColor = White
                             )
                         ) {
-                            Text("Send")
+                            Text((isGerman ? "Senden" : "Send"))
                         }
                     }
                 }
@@ -747,14 +747,14 @@ class MainActivity : ComponentActivity() {
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
                             Text(
-                                text = "Bruce Navigator",
+                                text = (isGerman ? "Bruce-Navigator" : "Bruce Navigator"),
                                 color = White,
                                 fontSize = 18.sp,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                             Text(
-                                text = "How do you want to reach the device?",
+                                text = (isGerman ? "Wie möchtest du das Gerät verbinden?" : "How do you want to reach the device?"),
                                 color = White.copy(alpha = 0.7f),
                                 fontSize = 13.sp
                             )
@@ -773,8 +773,8 @@ class MainActivity : ComponentActivity() {
                                 )
                             ) {
                                 Column {
-                                    Text("WiFi — WebUI", fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
-                                    Text("join the Bruce AP first", fontSize = 11.sp)
+                                    Text((isGerman ? "WLAN – Weboberfläche" : "WiFi — WebUI"), fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                                    Text((isGerman ? "Verbinde dich zuerst mit dem Bruce-WLAN." : "join the Bruce AP first"), fontSize = 11.sp)
                                 }
                             }
 
@@ -793,8 +793,8 @@ class MainActivity : ComponentActivity() {
                                 )
                             ) {
                                 Column {
-                                    Text("USB OTG — screen mirror", fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
-                                    Text("no WiFi needed, uses the serial cable", fontSize = 11.sp)
+                                    Text((isGerman ? "USB-OTG – Bildschirm spiegeln" : "USB OTG — screen mirror"), fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                                    Text((isGerman ? "Kein WLAN nötig, verwendet das serielle Kabel." : "no WiFi needed, uses the serial cable"), fontSize = 11.sp)
                                 }
                             }
 
@@ -807,7 +807,7 @@ class MainActivity : ComponentActivity() {
                                     containerColor = LightGray,
                                     contentColor = White
                                 )
-                            ) { Text("Cancel") }
+                            ) { Text((isGerman ? "Abbrechen" : "Cancel")) }
                         }
                     }
                 }
@@ -839,7 +839,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.padding(16.dp)
                         ) {
                             Text(
-                                text = "Bruce WebView Authentication",
+                                text = (isGerman ? "Bruce-WebView-Anmeldung" : "Bruce WebView Authentication"),
                                 color = White,
                                 fontSize = 18.sp,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -847,7 +847,7 @@ class MainActivity : ComponentActivity() {
                             Spacer(modifier = Modifier.height(8.dp))
 
                              Text(
-                                text = "Connect to Bruce WebUI WiFi before!",
+                                text = (isGerman ? "Verbinde dich zuerst mit dem Bruce-WebUI-WLAN!" : "Connect to Bruce WebUI WiFi before!"),
                                 color = White,
                                 fontSize = 12.sp,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -860,7 +860,7 @@ class MainActivity : ComponentActivity() {
                             OutlinedTextField(
                                 value = username,
                                 onValueChange = { username = it },
-                                label = { Text("Username", color = White) },
+                                label = { Text((isGerman ? "Benutzername" : "Username"), color = White) },
                                 modifier = Modifier.fillMaxWidth(),
                                 colors = OutlinedTextFieldDefaults.colors(
                                     focusedTextColor = White,
@@ -877,7 +877,7 @@ class MainActivity : ComponentActivity() {
                             OutlinedTextField(
                                 value = password,
                                 onValueChange = { password = it },
-                                label = { Text("Password", color = White) },
+                                label = { Text((isGerman ? "Passwort" : "Password"), color = White) },
                                 modifier = Modifier.fillMaxWidth(),
                                 colors = OutlinedTextFieldDefaults.colors(
                                     focusedTextColor = White,
@@ -902,7 +902,7 @@ class MainActivity : ComponentActivity() {
                                         containerColor = LightGray,
                                         contentColor = Black
                                     )
-                                ) { Text("Cancel") }
+                                ) { Text((isGerman ? "Abbrechen" : "Cancel")) }
                                 
                                 Button(
                                     onClick = { 
@@ -914,7 +914,7 @@ class MainActivity : ComponentActivity() {
                                         containerColor = PurpleAccent,
                                         contentColor = White
                                     )
-                                ) { Text("Connect") }
+                                ) { Text((isGerman ? "Verbinden" : "Connect")) }
                             }
                         }
                     }
@@ -971,7 +971,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.padding(16.dp)
                         ) {
                             Text(
-                                text = "Baud Rate Configuration",
+                                text = (isGerman ? "Baudrate konfigurieren" : "Baud Rate Configuration"),
                                 color = White,
                                 fontSize = 18.sp,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -979,7 +979,7 @@ class MainActivity : ComponentActivity() {
                             Spacer(modifier = Modifier.height(16.dp))
                             
                             Text(
-                                text = "Select baud rate for serial communication:",
+                                text = (isGerman ? "Baudrate für die serielle Kommunikation auswählen:" : "Select baud rate for serial communication:"),
                                 color = White,
                                 fontSize = 14.sp
                             )
@@ -1026,7 +1026,7 @@ class MainActivity : ComponentActivity() {
                             Spacer(modifier = Modifier.height(16.dp))
                             
                             Text(
-                                text = "Current: $baudRate bps",
+                                text = (isGerman ? "Aktuell: $baudRate Baud" : "Current: $baudRate bps"),
                                 color = PurpleAccent,
                                 fontSize = 14.sp,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -1042,7 +1042,7 @@ class MainActivity : ComponentActivity() {
                                     contentColor = White
                                 )
                             ) {
-                                Text("Apply")
+                                Text((isGerman ? "Übernehmen" : "Apply"))
                             }
                         }
                     }
@@ -1064,7 +1064,7 @@ class MainActivity : ComponentActivity() {
                         ) {
                             Column(modifier = Modifier.fillMaxWidth()) {
                                 Text(
-                                    text = "Custom Serial Commands",
+                                    text = (isGerman ? "Eigene serielle Befehle" : "Custom Serial Commands"),
                                     color = White,
                                     fontSize = 18.sp,
                                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -1074,7 +1074,7 @@ class MainActivity : ComponentActivity() {
                             Spacer(modifier = Modifier.height(8.dp))
                             
                             Text(
-                                text = "Tap any command to execute it via serial",
+                                text = (isGerman ? "Tippe auf einen Befehl, um ihn seriell auszuführen." : "Tap any command to execute it via serial"),
                                 color = PurpleAccent,
                                 fontSize = 12.sp
                             )
@@ -1092,13 +1092,13 @@ class MainActivity : ComponentActivity() {
                                         horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
                                         Text(
-                                            text = "No custom commands yet",
+                                            text = (isGerman ? "Noch keine eigenen Befehle vorhanden" : "No custom commands yet"),
                                             color = White.copy(alpha = 0.7f),
                                             fontSize = 14.sp
                                         )
                                         Spacer(modifier = Modifier.height(8.dp))
                                         Text(
-                                            text = "Tap '+ Add' to create your first command",
+                                            text = (isGerman ? "Tippe auf „+ Hinzufügen“, um deinen ersten Befehl zu erstellen." : "Tap '+ Add' to create your first command"),
                                             color = White.copy(alpha = 0.5f),
                                             fontSize = 12.sp
                                         )
@@ -1154,7 +1154,7 @@ class MainActivity : ComponentActivity() {
                                                         ),
                                                         shape = RoundedCornerShape(6.dp)
                                                     ) {
-                                                        Text("Run", fontSize = 13.sp)
+                                                        Text((isGerman ? "Ausführen" : "Run"), fontSize = 13.sp)
                                                     }
                                                     
                                                     Spacer(modifier = Modifier.width(2.dp))
@@ -1183,7 +1183,7 @@ class MainActivity : ComponentActivity() {
                             Spacer(modifier = Modifier.height(16.dp))
                             
                             Text(
-                                text = "Connection: $baudRate bps, 8N1, No Flow Control",
+                                text = (isGerman ? "Verbindung: $baudRate Baud, 8N1, keine Flusskontrolle" : "Connection: $baudRate bps, 8N1, No Flow Control"),
                                 color = White.copy(alpha = 0.7f),
                                 fontSize = 11.sp
                             )
@@ -1202,12 +1202,12 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 Icon(
                                     Icons.Default.Add,
-                                    contentDescription = "Add Command",
+                                    contentDescription = (isGerman ? "Befehl hinzufügen" : "Add Command"),
                                     tint = White,
                                     modifier = Modifier.size(18.dp)
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
-                                Text("Add Command", fontSize = 14.sp, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                                Text((isGerman ? "Befehl hinzufügen" : "Add Command"), fontSize = 14.sp, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
                             }
 
                             Spacer(modifier = Modifier.height(10.dp))
@@ -1220,7 +1220,7 @@ class MainActivity : ComponentActivity() {
                                     contentColor = White
                                 )
                             ) {
-                                Text("Close")
+                                Text((isGerman ? "Schließen" : "Close"))
                             }
                         }
                     }
@@ -1240,7 +1240,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.padding(16.dp)
                         ) {
                             Text(
-                                text = "Add Custom Command",
+                                text = (isGerman ? "Eigenen Befehl hinzufügen" : "Add Custom Command"),
                                 color = White,
                                 fontSize = 18.sp,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -1253,8 +1253,8 @@ class MainActivity : ComponentActivity() {
                             OutlinedTextField(
                                 value = commandName,
                                 onValueChange = { commandName = it },
-                                label = { Text("Command Name", color = White) },
-                                placeholder = { Text("e.g., LED On", color = White.copy(alpha = 0.5f)) },
+                                label = { Text((isGerman ? "Befehlsname" : "Command Name"), color = White) },
+                                placeholder = { Text((isGerman ? "z. B. LED an" : "e.g., LED On"), color = White.copy(alpha = 0.5f)) },
                                 modifier = Modifier.fillMaxWidth(),
                                 colors = OutlinedTextFieldDefaults.colors(
                                     focusedTextColor = White,
@@ -1271,8 +1271,8 @@ class MainActivity : ComponentActivity() {
                             OutlinedTextField(
                                 value = commandText,
                                 onValueChange = { commandText = it },
-                                label = { Text("Serial Command", color = White) },
-                                placeholder = { Text("e.g., led r 255", color = White.copy(alpha = 0.5f)) },
+                                label = { Text((isGerman ? "Serieller Befehl" : "Serial Command"), color = White) },
+                                placeholder = { Text((isGerman ? "z. B. led r 255" : "e.g., led r 255"), color = White.copy(alpha = 0.5f)) },
                                 modifier = Modifier.fillMaxWidth(),
                                 colors = OutlinedTextFieldDefaults.colors(
                                     focusedTextColor = White,
@@ -1287,7 +1287,7 @@ class MainActivity : ComponentActivity() {
                             Spacer(modifier = Modifier.height(16.dp))
                             
                             Text(
-                                text = "Examples:",
+                                text = (isGerman ? "Beispiele:" : "Examples:"),
                                 color = PurpleAccent,
                                 fontSize = 12.sp,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -1323,7 +1323,7 @@ class MainActivity : ComponentActivity() {
                                         contentColor = Black
                                     )
                                 ) {
-                                    Text("Cancel")
+                                    Text((isGerman ? "Abbrechen" : "Cancel"))
                                 }
                                 
                                 Button(
@@ -1345,7 +1345,7 @@ class MainActivity : ComponentActivity() {
                                         contentColor = White
                                     )
                                 ) {
-                                    Text("Add Command")
+                                    Text((isGerman ? "Befehl hinzufügen" : "Add Command"))
                                 }
                             }
                         }
@@ -1366,7 +1366,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.padding(16.dp)
                         ) {
                             Text(
-                                text = "Documentation",
+                                text = (isGerman ? "Dokumentation" : "Documentation"),
                                 color = White,
                                 fontSize = 18.sp,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -1383,7 +1383,7 @@ class MainActivity : ComponentActivity() {
                                         contentColor = White
                                     ),
                                     modifier = Modifier.fillMaxWidth()
-                                ) { Text("Open https://bruce.computer") }
+                                ) { Text((isGerman ? "https://bruce.computer öffnen" : "Open https://bruce.computer")) }
 
                                 Button(
                                     onClick = {
@@ -1395,7 +1395,7 @@ class MainActivity : ComponentActivity() {
                                         contentColor = White
                                     ),
                                     modifier = Modifier.fillMaxWidth()
-                                ) { Text("Open Serial Wiki") }
+                                ) { Text((isGerman ? "Serielles Wiki öffnen" : "Open Serial Wiki")) }
 
                                 Button(
                                     onClick = {
@@ -1407,7 +1407,7 @@ class MainActivity : ComponentActivity() {
                                         contentColor = White
                                     ),
                                     modifier = Modifier.fillMaxWidth()
-                                ) { Text("BruceApp repo") }
+                                ) { Text((isGerman ? "Bruce-App-Repository" : "BruceApp repo")) }
 
                             }
                             Spacer(modifier = Modifier.height(16.dp))
@@ -1419,7 +1419,7 @@ class MainActivity : ComponentActivity() {
                                     contentColor = White
                                 )
                             ) {
-                                Text("Close")
+                                Text((isGerman ? "Schließen" : "Close"))
                             }
                         }
                     }
@@ -1440,14 +1440,14 @@ class MainActivity : ComponentActivity() {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
-                                text = "Installation finished",
+                                text = (isGerman ? "Installation abgeschlossen" : "Installation finished"),
                                 color = White,
                                 fontSize = 20.sp,
                                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
                             )
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
-                                text = "Bruce Firmware Updated!",
+                                text = (isGerman ? "Bruce-Firmware aktualisiert!" : "Bruce Firmware Updated!"),
                                 color = White,
                                 fontSize = 14.sp,
                                 textAlign = TextAlign.Center
@@ -1465,7 +1465,7 @@ class MainActivity : ComponentActivity() {
                                 shape = RoundedCornerShape(12.dp)
                             ) {
                                 Text(
-                                    text = "OK",
+                                    text = (isGerman ? "OK" : "OK"),
                                     fontSize = 16.sp,
                                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
                                 )
