@@ -821,6 +821,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     ScreenMirrorPanel(
                         serial = serialCommunication,
+                        isGerman = isGerman,
                         onClose = { showUsbMirror = false }
                     )
                 }
