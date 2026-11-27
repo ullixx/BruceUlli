@@ -155,6 +155,8 @@ class MainActivity : ComponentActivity() {
         var deviceList by remember { mutableStateOf(listOf<DeviceInfo>()) }
         var isTerminalMaximized by remember { mutableStateOf(false) }
         var baudRate by remember { mutableStateOf("115200") }
+        val languagePrefs = remember { context.getSharedPreferences("bruce_settings", android.content.Context.MODE_PRIVATE) }
+        var isGerman by remember { mutableStateOf(languagePrefs.getBoolean("language_german", true)) }
         var showBaudRateDialog by remember { mutableStateOf(false) }
         var showSerialCmdDialog by remember { mutableStateOf(false) }
         var isUploading by remember { mutableStateOf(false) }
@@ -982,6 +984,11 @@ class MainActivity : ComponentActivity() {
                                 fontSize = 14.sp
                             )
                             
+                            Text("Sprache / Language", color = White, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Button(onClick = { isGerman = true; languagePrefs.edit().putBoolean("language_german", true).apply() }) { Text("Deutsch") }
+                                Button(onClick = { isGerman = false; languagePrefs.edit().putBoolean("language_german", false).apply() }) { Text("English") }
+                            }
                             Spacer(modifier = Modifier.height(16.dp))
                             
                             // Common baud rates
