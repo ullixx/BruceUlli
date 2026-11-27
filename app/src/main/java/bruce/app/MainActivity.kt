@@ -73,6 +73,29 @@ data class CustomSerialCommand(
     val command: String
 )
 
+private fun translateFirmwareStatus(message: String): String = message
+    .replace("Starting firmware download for device:", "Firmware-Download für Gerät wird gestartet:")
+    .replace("Downloading firmware from GitHub...", "Firmware wird von GitHub heruntergeladen...")
+    .replace("Firmware downloaded", "Firmware heruntergeladen")
+    .replace("Saving firmware to temporary file...", "Firmware wird in temporärer Datei gespeichert...")
+    .replace("Firmware saved to:", "Firmware gespeichert unter:")
+    .replace("Preparing esptool with arguments:", "esptool wird mit folgenden Argumenten vorbereitet:")
+    .replace("Chip:", "Chip:")
+    .replace("Baud Rate:", "Baudrate:")
+    .replace("File:", "Datei:")
+    .replace("Checking USB connection...", "USB-Verbindung wird geprüft...")
+    .replace("Starting firmware upload process...", "Firmware-Upload wird gestartet...")
+    .replace("Executing:", "Wird ausgeführt:")
+    .replace("Raw result:", "Rohes Ergebnis:")
+    .replace("Found ", "Gefunden: ")
+    .replace(" lines of output", " Ausgabezeilen")
+    .replace("Firmware upload completed successfully!", "Firmware erfolgreich übertragen!")
+    .replace("Device should restart automatically...", "Das Gerät sollte automatisch neu starten...")
+    .replace("Upload failed with error:", "Upload fehlgeschlagen. Fehler:")
+    .replace("Firmware Updated!", "Firmware aktualisiert!")
+    .replace("Error during upload:", "Fehler während des Uploads:")
+    .replace("Check USB connection and try again", "USB-Verbindung prüfen und erneut versuchen")
+
 class CustomCommandsDatabaseHelper(context: android.content.Context) : SQLiteOpenHelper(context, "custom_commands.db", null, 1) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
@@ -428,7 +451,7 @@ class MainActivity : ComponentActivity() {
                                             family = deviceList.find { it.id == selectedDevice }?.family ?: "ESP32-S3",
                                             baudRate = baudRate,
                                             onStatusChange = { status ->
-                                                terminalOutput = terminalOutput + "> $status"
+                                                terminalOutput = terminalOutput + "> " + if (isGerman) translateFirmwareStatus(status) else status
                                             },
                                             onLoadingChange = { loading ->
                                                 isUploading = loading
