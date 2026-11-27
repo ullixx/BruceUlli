@@ -172,7 +172,7 @@ class MainActivity : ComponentActivity() {
         
         // Initialize serial communication and database
         LaunchedEffect(Unit) {
-            serialCommunication = AndroidSerialCommunication(context)
+            serialCommunication = AndroidSerialCommunication(context) { isGerman }
             serialCommunication?.setOutputListener { message ->
                 terminalOutput = terminalOutput + message
             }
