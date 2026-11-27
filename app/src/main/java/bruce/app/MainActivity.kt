@@ -160,6 +160,7 @@ class MainActivity : ComponentActivity() {
         var isUploading by remember { mutableStateOf(false) }
         var showInstallationCompleteDialog by remember { mutableStateOf(false) }
         var showAddCustomCmdDialog by remember { mutableStateOf(false) }
+        var showLocalTestLog by remember { mutableStateOf(false) }
         var customCommands by remember { mutableStateOf(listOf<CustomSerialCommand>()) }
         val terminalListState = rememberLazyListState()
         
@@ -247,6 +248,10 @@ class MainActivity : ComponentActivity() {
                     ) {
                         Text("Serial CMD")
                     }
+                }
+
+                OutlinedButton(onClick = { showLocalTestLog = true }, modifier = Modifier.fillMaxWidth()) {
+                    Text("Lokales Testprotokoll")
                 }
 
                 // Loading indicator below action buttons
@@ -464,6 +469,10 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 }
+            }
+
+            if (showLocalTestLog) {
+                LocalPortalTestLogDialog(onDismiss = { showLocalTestLog = false })
             }
 
             // Terminal section at bottom
