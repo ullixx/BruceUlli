@@ -300,7 +300,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Icon(
                         Icons.Default.Settings,
-                        contentDescription = "Configuration",
+                        contentDescription = (if (isGerman) "Einstellungen" else "Configuration"),
                         tint = White
                     )
                 }
@@ -1168,7 +1168,7 @@ class MainActivity : ComponentActivity() {
                                                     ) {
                                                         Icon(
                                                             Icons.Default.Close,
-                                                            contentDescription = "Delete",
+                                                            contentDescription = (if (isGerman) "Löschen" else "Delete"),
                                                             tint = White,
                                                             modifier = Modifier.size(18.dp)
                                                         )
@@ -1294,17 +1294,17 @@ class MainActivity : ComponentActivity() {
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
-                                text = "• Name: 'LED Red' → Command: 'led r 255'",
+                                text = (if (isGerman) "• Name: 'LED Rot' → Befehl: 'led r 255'" else "• Name: 'LED Red' → Command: 'led r 255'"),
                                 color = White.copy(alpha = 0.7f),
                                 fontSize = 11.sp
                             )
                             Text(
-                                text = "• Name: 'Say Hello' → Command: 'say Hello World'",
+                                text = (if (isGerman) "• Name: 'Hallo sagen' → Befehl: 'say Hello World'" else "• Name: 'Say Hello' → Command: 'say Hello World'"),
                                 color = White.copy(alpha = 0.7f),
                                 fontSize = 11.sp
                             )
                             Text(
-                                text = "• Name: 'IR Send' → Command: 'ir tx NEC 04000000'",
+                                text = (if (isGerman) "• Name: 'IR senden' → Befehl: 'ir tx NEC 04000000'" else "• Name: 'IR Send' → Command: 'ir tx NEC 04000000'"),
                                 color = White.copy(alpha = 0.7f),
                                 fontSize = 11.sp
                             )
