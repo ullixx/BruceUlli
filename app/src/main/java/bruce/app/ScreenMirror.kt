@@ -361,7 +361,7 @@ fun ScreenMirrorPanel(
                 modifier = Modifier.weight(1f)
             )
             Text(
-                text = if (isStreaming) "$packetCount pkts" else "idle",
+                text = if (isStreaming) "$packetCount " + (if (isGerman) "Pakete" else "pkts") else if (isGerman) "Bereit" else "idle",
                 color = if (isStreaming) PurpleAccent else White.copy(alpha = 0.6f),
                 fontSize = 12.sp
             )
