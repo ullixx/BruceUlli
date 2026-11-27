@@ -27,7 +27,7 @@ import java.util.Locale
 
 /** Temporäres Ereignisprotokoll für autorisierte Portal-Tests; speichert keine Zugangsdaten. */
 @Composable
-fun LocalPortalTestLogDialog(onDismiss: () -> Unit) {
+fun LocalPortalTestLogDialog(isGerman: Boolean, onDismiss: () -> Unit) {
     val entries = remember { mutableStateListOf<String>() }
     var event by remember { mutableStateOf("") }
     var note by remember { mutableStateOf("") }
@@ -35,15 +35,15 @@ fun LocalPortalTestLogDialog(onDismiss: () -> Unit) {
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Lokales Testprotokoll") },
+        title = { Text(if (isGerman) "Lokales Testprotokoll" else "Local test log") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("Testereignisse manuell protokollieren. Keine Passwörter oder Zugangsdaten eingeben.")
+                Text(if (isGerman) "Testereignisse manuell protokollieren. Keine Passwörter oder Zugangsdaten eingeben." else "Log test events manually. Do not enter passwords or credentials.")
                 OutlinedTextField(value = event, onValueChange = { event = it },
-                    label = { Text("Ereignis (z. B. Portal geöffnet)") },
+                    label = { Text(if (isGerman) "Ereignis (z. B. Portal geöffnet)" else "Event (e.g. portal opened)") },
                     modifier = Modifier.fillMaxWidth(), singleLine = true)
                 OutlinedTextField(value = note, onValueChange = { note = it },
-                    label = { Text("Notiz (ohne Zugangsdaten)") }, modifier = Modifier.fillMaxWidth())
+                    label = { Text(if (isGerman) "Notiz (ohne Zugangsdaten)" else "Note (no credentials)") }, modifier = Modifier.fillMaxWidth())
                 Button(onClick = {
                     if (event.isNotBlank()) {
                         val stamp = formatter.format(Date())
@@ -51,16 +51,16 @@ fun LocalPortalTestLogDialog(onDismiss: () -> Unit) {
                         event = ""
                         note = ""
                     }
-                }, modifier = Modifier.fillMaxWidth()) { Text("Ereignis speichern") }
-                Text("Sitzungsprotokoll (" + entries.size + ")")
+                }, modifier = Modifier.fillMaxWidth()) { Text(if (isGerman) "Ereignis speichern" else "Save event") }
+                Text((if (isGerman) "Sitzungsprotokoll (" else "Session log (") + entries.size + ")")
                 LazyColumn(modifier = Modifier.fillMaxWidth().heightIn(max = 180.dp)) {
                     items(entries) { item -> Text(item, modifier = Modifier.padding(vertical = 3.dp)) }
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    TextButton(onClick = { entries.clear() }) { Text("Protokoll löschen") }
+                    TextButton(onClick = { entries.clear() }) { Text(if (isGerman) "Protokoll löschen" else "Clear log") }
                 }
             }
         },
-        confirmButton = { TextButton(onClick = onDismiss) { Text("Schließen") } }
+        confirmButton = { TextButton(onClick = onDismiss) { Text(if (isGerman) "Schließen" else "Close") } }
     )
 }
